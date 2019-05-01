@@ -1,11 +1,9 @@
-
-# A very simple Flask Hello World app for you to get started with...
-
-<<<<<<< HEAD
-from flask import Flask, render_template, redirect, request, url_for
+from flask import Flask, redirect, render_template, request, url_for
+import git
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
+
 comments = []
 
 @app.route("/", methods=["GET", "POST"])
@@ -16,16 +14,7 @@ def index():
     comments.append(request.form["contents"])
     return redirect(url_for('index'))
 
-
-=======
-from flask import Flask, request
-
-app = Flask(__name__)
-
-@app.route('/')
-def hello_world():
-    return 'Hello, this is a basic message.'
-
+# Webhook link to GitHub
 @app.route('/webhook', methods=['POST'])
 def webhook():
     if request.method == 'POST':
@@ -37,4 +26,3 @@ def webhook():
         return '', 200
     else:
         return '', 400
->>>>>>> 7a142734abae71e262233fdeb488b19bece722d2
