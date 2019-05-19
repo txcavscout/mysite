@@ -6,13 +6,21 @@ app.config["DEBUG"] = True
 
 comments = []
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/")
 def index():
-    if request.method == "GET":
-        return render_template("main_page.html", comments=comments)
+   return render_template("index.html")
 
-    comments.append(request.form["contents"])
-    return redirect(url_for('index'))
+@app.route("/noteboard", methods=["GET", "POST"])
+def nb():
+    if request.method == "GET":
+        return render_template("noteboard.html", comments=comments)
+
+    elif request.method == "POST":
+        comments.append(request.form["contents"])
+        return render_template("noteboard.html", comments=comments)
+        #return redirect(url_for('noteboard.html'))
+
+
 
 # Webhook link to GitHub
 @app.route('/webhook', methods=['POST'])
